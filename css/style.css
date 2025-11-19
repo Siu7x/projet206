@@ -1,23 +1,44 @@
 body {
-  background: #000;
-  color: #fff;
-  font-family: Arial, sans-serif;
   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
+
+/* Header */
 header {
-  background: linear-gradient(to right, #8b0000, #000);
-  padding: 20px;
+  background-color: #F28500;
+  padding: 10px 20px;
 }
-.card {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 20px;
-  margin-bottom: 15px;
-  border-radius: 10px;
+
+header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.text-red {
-  color: #c00000;
-}
-img.responsive {
-  width: 100%;
+
+/* Logo */
+.logo {
+  width: 120px;   /* Taille du logo */
   height: auto;
+}
+
+/* Menu */
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+header nav ul li a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+header nav ul li a:hover {
+  color: #F57C00;
 }
