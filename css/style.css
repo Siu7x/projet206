@@ -10,6 +10,8 @@ body {
     color: white;
     font-family: Arial, sans-serif;
       text-align: center;
+       background: no-repeat linear-gradient(140deg, #0a0a0a 60%, #ff4b1f22);
+       overflow-x: hidden;
 }
 
 /* Header */
@@ -101,6 +103,15 @@ header nav ul li a:hover {
 .btn-contact:hover {
     background: #ff643c;
 }
-main{
-    background: no-repeat linear-gradient(140deg, #0a0a0a 60%, #ff4b1f22);
+
+footer  {
+    background: #000;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 500px;
+
+
+
+
 }
