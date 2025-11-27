@@ -1,20 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
 body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  background: #0a0a0a;
+    color: white;
+    font-family: Arial, sans-serif;
+      text-align: center;
 }
 
 /* Header */
 header {
-  background-color: #F28500;
-  padding: 10px 20px;
+   background: #000;
+    padding: 25px 0;
 }
+
+
 
 header nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-right: 1%;
+  border: solid 1px;
+  color: #ffffff;
+  
 }
 
 /* Logo */
@@ -27,18 +40,67 @@ header nav {
 header nav ul {
   list-style: none;
   display: flex;
-  gap: 30px;
+  gap: 50px;
   margin: 0;
   padding: 0;
 }
 
 header nav ul li a {
-  font-weight: bold;
-  text-decoration: none;
-  color: #ffffff;
-  font-size: 18px;
+ margin: 0 px;
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+    font-family: "Russo One", sans-serif;
+  padding-left: 80px;
 }
 
 header nav ul li a:hover {
   color: #F57C00;
+}
+
+
+.hero .hero-content H1 {
+  text-align: center;
+  color: #EB6E23;
+  padding: 100px 20px;
+   font-family: "Russo One", sans-serif;
+}
+
+.hero .hero-content p {
+  text-align: center;
+  color: #000000;
+  font-size: 20px;
+  margin-top: 1px;
+   font-family: "Russo One", sans-serif;
+}
+
+.right-buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.cart {
+    color: #ff4b1f;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.contact {
+    background: #ff4b1f;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+    font-family: "Russo One", sans-serif;
+}
+
+.btn-contact:hover {
+    background: #ff643c;
+}
+main{
+    background: no-repeat linear-gradient(140deg, #0a0a0a 60%, #ff4b1f22);
 }
