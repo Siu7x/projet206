@@ -25,5 +25,39 @@
         </ul>
       </nav>
     </header>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envoyer un Email avec SMTP.js</title>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+</head>
+<body>
+    <!-- Section d'en-tête ajoutée au corps pour fournir un contenu introductif -->
+    <header>
+        <h1>Application d'envoi d'email</h1> <!-- Titre principal de la page web -->
+        <p>Cliquez sur le bouton ci-dessous pour envoyer un email en utilisant SMTP.js</p> <!-- Description de la fonctionnalité de la page -->
+    </header>
+    <button onclick="sendEmail()">Envoyer Email</button> <!-- Bouton pour déclencher l'envoi de l'email -->
+
+    <script>
+        function sendEmail() {
+            Email.send({
+                Host: "smtp.yourisp.com",
+                Username: "nom_utilisateur",
+                Password: "password",
+                To: 'destinataire@exemple.com',
+                From: "expediteur@exemple.com",
+                Subject: "Email de Test",
+                Body: "Ceci est un email de test envoyé en utilisant SMTP.js"
+            })
+            .then(function (message) {
+                alert("Email envoyé avec succès") // Message d'alerte en cas de succès de l'envoi de l'email
+            });
+        }
+    </script>
+</body>
+</html>
   </body>
 </html>
