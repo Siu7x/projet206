@@ -28,85 +28,7 @@ h2 {
 
 
 
-header {
 
-    background-color: #ff8c00; /* Orange vif */
-
-    padding: 15px 40px;
-
-    font-family: Arial, sans-serif;
-
-}
-
-
-
-header nav {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-}
-
-
-
-header nav > a {
-
-    color: white;
-
-    text-decoration: none;
-
-    font-weight: bold;
-
-    font-size: 1.5rem;
-
-    text-transform: uppercase;
-
-}
-
-
-
-header ul {
-
-    list-style: none;
-
-    display: flex;
-
-    margin: 0;
-
-    padding: 0;
-
-    gap: 25px;
-
-}
-
-
-
-header ul li a {
-
-    color: white;
-
-    text-decoration: none;
-
-    font-size: 0.9rem;
-
-    font-weight: 600;
-
-    text-transform: uppercase;
-
-    transition: opacity 0.3s ease;
-
-}
-
-
-
-header ul li a:hover {
-
-    opacity: 0.8;
-
-}
 
 /* --- LAYOUT ALTERNÉ --- */
 .container {
@@ -232,4 +154,70 @@ footer a {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+<nav class="site-nav">
+        <div class="site-nav-inner">
+            <div class="brand">206RT</div>
+            <div class="site-links">
+                <a href="../html/equipe.html" class="nav-link">Equipe</a>
+                <a href="#" class="nav-link">Calendrier</a>
+                <a href="../html/contact.html" class="nav-link">Contact</a>
+                <a href="#" class="nav-link">Accueil</a>
+            </div>
+        </div>
+        <div class="ligne-blanche-head"></div>
+    </nav>
+.site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+}
+
+.site-nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2.5rem; /* py-6 (1.5rem) px-10 (2.5rem) */
+    mix-blend-mode: difference;
+    color: white;
+    font-weight: 700;
+}
+
+.brand {
+    font-size: 1.875rem; / text-3xl /
+    font-weight: 900;
+    letter-spacing: -0.02em; / tracking-tighter /
+    font-family: 'Oswald', sans-serif;
+}
+
+.site-links {
+    display: flex;
+    gap: 2rem; / gap-8 /
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em; / tracking-widest */
+    font-weight: 700;
+}
+
+.site-links .nav-link {
+    color: white;
+    text-decoration: none;
+    position: relative;
+}
+
+.site-links .nav-link:hover { opacity: 0.7; }
+
+.ligne-blanche-head {
+    width: 95%;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 1);
+    margin-left: auto;
+    margin-right: auto;
 }
