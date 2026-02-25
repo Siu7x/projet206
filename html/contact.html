@@ -1,63 +1,18 @@
 <!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="../images/logo206.png" />
-    <link rel="stylesheet" href="../css/style.css" />
-        <!-- responsive -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Peugeot206</title>
-  </head>
-
-  <body>
-    <header>
-      <nav>
-        <a href="index.html">
-          <img src="../images/logo206.png" alt="logo" class="logo" />
-        </a>
-
-        <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="equipe.html">Equipe</a></li>
-          <li><a href="calendrier.html">Calendrier</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
-    <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Envoyer un Email avec SMTP.js</title>
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
-    <!-- Section d'en-tête ajoutée au corps pour fournir un contenu introductif -->
-    <header>
-        <h1>Application d'envoi d'email</h1> <!-- Titre principal de la page web -->
-        <p>Cliquez sur le bouton ci-dessous pour envoyer un email en utilisant SMTP.js</p> <!-- Description de la fonctionnalité de la page -->
-    </header>
-    <button onclick="sendEmail()">Envoyer Email</button> <!-- Bouton pour déclencher l'envoi de l'email -->
-
-    <script>
-        function sendEmail() {
-            Email.send({
-                Host: "smtp.yourisp.com",
-                Username: "nom_utilisateur",
-                Password: "password",
-                To: 'destinataire@exemple.com',
-                From: "expediteur@exemple.com",
-                Subject: "Email de Test",
-                Body: "Ceci est un email de test envoyé en utilisant SMTP.js"
-            })
-            .then(function (message) {
-                alert("Email envoyé avec succès") // Message d'alerte en cas de succès de l'envoi de l'email
-            });
-        }
-    </script>
+  <form action="https://api.web3forms.com/submit" method="POST">
+  <input type="hidden" name="access_key" value="82d3062d-ce69-43b0-bf91-a0202d378032">
+  <input type="text" name="name" required>
+  <input type="email" name="email" required>
+  <textarea name="message" required></textarea>
+  <button type="submit">Submit</button>
+</form>
 </body>
-</html>
-  </body>
+<script src="../js/contact.js"> </script>
 </html>
