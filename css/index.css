@@ -109,8 +109,11 @@
     background-position: center;
 }
 .photo-enzo {
-   
-   width: 85vw;              /* Largeur imposante pour l'effet visuel */
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85vw;              /* Largeur imposante pour l'effet visuel */
     height: 85vh;             /* Hauteur de l'image (85% de l'écran) */
     background-image: url('../images/enzolum.png'); 
     background-size: contain;  /* EFFET : L'image n'est jamais déformée */
