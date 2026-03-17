@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon Calendrier Rallye</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
+        .card { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; shadow: 2px 2px 5px rgba(0,0,0,0.1); }
+        h1 { color: #e63946; }
+    </style>
+</head>
+<body>
+    <h1>Calendrier FFSA - Rallye</h1>
+    
+    {% for rallye in rallyes %}
+    <div class="card">
+        <strong>{{ rallye.date }}</strong> : {{ rallye.nom }}
+    </div>
+    {% endfor %}
+
+</body>
+</html>

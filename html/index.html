@@ -6,6 +6,7 @@
     <title>Enzo Ragni | 206RT</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/nav.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
 </head>
 <body class="bg-black/30"> <div class="grain-overlay"></div>
@@ -15,15 +16,14 @@
 
     <div id="cursor-lens"></div>
 
-    <nav class="fixed top-0 w-full z-50 flex flex-col">
-        <div class="flex justify-between items-center px-10 py-6 mix-blend-difference text-white font-bold">
-            <div class="text-3xl font-black tracking-tighter ">206RT</div>
-            <div class="flex gap-8 text-[13px] font-bold uppercase tracking-widest">
-                <a href="#" class="nav-link">Equipe</a>
-                <a href="#" class="nav-link">Calendrier</a>
+    <nav class="site-nav">
+        <div class="site-nav-inner">
+            <div class="brand">206RT</div>
+            <div class="site-links">
+                <a href="../html/index.html" class="nav-link">Accueil</a>
+                <a href="../html/equipe.html" class="nav-link">Equipe</a>
+                <a href="../html/calendrier.html" class="nav-link">Calendrier</a>
                 <a href="../html/contact.html" class="nav-link">Contact</a>
-                <a href="#" class="nav-link">Accueil</a>
-
             </div>
         </div>
         <div class="ligne-blanche-head"></div>
@@ -113,6 +113,33 @@
     <div class="ligne-blanche"></div>
 </section>
 
+<section class="social-section">
+    <h2>MES RÉSEAUX SOCIAUX</h2>
+    <p class="subtitle">POUR SUIVRE MON AVENTURE</p>
+
+    <div class="social-icons">
+        <a href="https://www.instagram.com/206.racingteam?igsh=MWEweTg2cmcxcWZ1ZA%3D%3D&utm_source=qr"><img src="../reseau/instagram.png" alt="Instagram"></a>
+        <a href="https://www.youtube.com/@206RT-v4l"><img src="../reseau/youtube.png" alt="YouTube"></a>
+        <a href="https://www.tiktok.com/@206_rt?_r=1&_t=ZN-933tNWdvaZa"><img src="../reseau/tiktok.png" alt="TikTok"></a>
+        <a href="#"><img src="../reseau/facebook.png" alt="Facebook"></a>
+    </div>
+</section>
+
+<div class="ligne-blanche"></div>
+
+<footer class="footer-bottom">
+    <nav class="footer-links">
+        <a href="index.html">ACCUEIL</a>
+        <a href="equipe.html">EQUIPE</a>
+        <a href="calendrier.html">CALENDRIER</a>
+        <a href="contact.html">CONTACT</a>
+    </nav>
+
+    <div class="footer-brand">
+        <p class="brand-name">206RT</p>
+        <p class="legal"> 2026 par Nathan GRUNEWALD</p>
+    </div>
+</footer>
 
 
     </main>

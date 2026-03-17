@@ -156,20 +156,6 @@ footer a {
     to { opacity: 1; transform: translateY(0); }
 }
 
-
-
-<nav class="site-nav">
-        <div class="site-nav-inner">
-            <div class="brand">206RT</div>
-            <div class="site-links">
-                <a href="../html/equipe.html" class="nav-link">Equipe</a>
-                <a href="#" class="nav-link">Calendrier</a>
-                <a href="../html/contact.html" class="nav-link">Contact</a>
-                <a href="#" class="nav-link">Accueil</a>
-            </div>
-        </div>
-        <div class="ligne-blanche-head"></div>
-    </nav>
 .site-nav {
     position: fixed;
     top: 0;
@@ -191,18 +177,18 @@ footer a {
 }
 
 .brand {
-    font-size: 1.875rem; / text-3xl /
+    font-size: 1.875rem; 
     font-weight: 900;
-    letter-spacing: -0.02em; / tracking-tighter /
+    letter-spacing: -0.02em; 
     font-family: 'Oswald', sans-serif;
 }
 
 .site-links {
     display: flex;
-    gap: 2rem; / gap-8 /
+    gap: 2rem; 
     font-size: 13px;
     text-transform: uppercase;
-    letter-spacing: 0.12em; / tracking-widest */
+    letter-spacing: 0.12em; 
     font-weight: 700;
 }
 
