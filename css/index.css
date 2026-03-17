@@ -114,7 +114,7 @@
     left: 50%;
     transform: translateX(-50%);
     width: 85vw;              /* Largeur imposante pour l'effet visuel */
-    height: 85vh;             /* Hauteur de l'image (85% de l'écran) */
+    height: 95vh;             /* Hauteur de l'image (85% de l'écran) */
     background-image: url('../images/enzolum.png'); 
     background-size: contain;  /* EFFET : L'image n'est jamais déformée */
     background-position: center bottom; /* CAUSE : Aligne la base de l'image source au bas du bloc */
@@ -426,3 +426,71 @@ canvas {
     100% { transform: translateX(-100%); }
 }
 
+/* Style de la section réseaux */
+.social-section {
+    text-align: center;
+    padding: 40px 0;
+    background-color: #000000;
+    color: white;
+    font-size: 2.875rem;
+    font-weight: 900;
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 5rem;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 120px;
+    margin-top: 12rem;
+}
+
+.social-icons img {
+    width: 20vh;
+    height: auto;
+}
+
+/* La ligne de séparation */
+.footer-divider {
+    width: 85%;
+    border: none;
+    border-top: 1px solid #333;
+    margin: 0 auto; /* Centrée */
+    background-color: #000000;
+}
+
+/* LE FOOTER (uniquement le bas) */
+.footer-bottom {
+    background-color: #000000;
+    color: white;
+    text-align: center;
+    padding: 40px 0 20px 0;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.brand-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.legal {
+    color: #ffffff;
+    font-size: 0.7rem;
+}

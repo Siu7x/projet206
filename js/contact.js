@@ -34,3 +34,29 @@ form.addEventListener('submit', async (e) => {
         submitBtn.disabled = false;
     }
 });
+
+// --- animation and scroll effects (inspired by index.js) ---
+document.addEventListener("DOMContentLoaded", () => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Fade in main heading immediately
+    gsap.from("main h1", {
+        opacity: 0,
+        y: 20,
+        duration: 1,
+        ease: "power2.out"
+    });
+
+    // Cards reveal on scroll
+    gsap.from(".card", {
+        opacity: 0,
+        y: 30,
+        stagger: 0.2,
+        scrollTrigger: {
+            trigger: ".card",
+            start: "top 85%",
+            end: "bottom 60%",
+            scrub: false
+        }
+    });
+});
