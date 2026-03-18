@@ -428,30 +428,93 @@ canvas {
 
 /* Style de la section réseaux */
 .social-section {
+    padding: 80px 40px;
     text-align: center;
-    padding: 40px 0;
     background-color: #000000;
-    color: white;
-    font-size: 2.875rem;
-    font-weight: 900;
-    font-family: 'Oswald', sans-serif;
-    text-align: center;
-    text-transform: uppercase;
-    margin-bottom: 5rem;
 }
 
-.social-icons {
+.social-label {
+    font-size: 19px;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-family: 'Oswald', sans-serif;
+}
+
+.social-title {
+    font-size: 62px;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+    font-family: 'Oswald', sans-serif;
+}
+
+.divider {
+    width: 32px;
+    height: 0.5px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px auto 40px;
+}
+
+.social-grid {
     display: flex;
     justify-content: center;
-    gap: 120px;
-    margin-top: 12rem;
+    gap: 46px;
+    flex-wrap: wrap;
 }
 
-.social-icons img {
-    width: 20vh;
-    height: auto;
+.social-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 28px 36px;
+    border: 0.5px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    background: transparent;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 28px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    transition: border-color 0.2s, color 0.2s;
+    min-width: 120px;
 }
 
+.social-card:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #ffffff;
+}
+
+.social-card img {
+    width: 58px;
+    height: 68px;
+    object-fit: contain;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.social-card:hover img {
+    opacity: 1;
+}
+
+@media (max-width: 600px) {
+    .social-section {
+        padding: 60px 20px;
+    }
+
+    .social-grid {
+        gap: 12px;
+    }
+
+    .social-card {
+        padding: 20px 24px;
+        min-width: 100px;
+    }
+}
 /* La ligne de séparation */
 .footer-divider {
     width: 85%;
