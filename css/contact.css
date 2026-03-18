@@ -8,37 +8,65 @@ body {
     background-color: #222222; /* Gris très foncé */
     color: white;
     font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Image Circuit au centre - PLEIN ÉCRAN */
+body::after {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/circruit.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 0;
 }
 
 /* Header & Navbar */
 header {
 }
 
-
-
-
-
-
 .container {
     max-width: 800px;
     margin: 40px auto;
     text-align: center;
     padding: 0 20px;
+    width: 90%;
+    position: relative;
+    z-index: 2;
 }
 
 h1 {
     font-size: 2rem;
     margin-bottom: 40px;
     letter-spacing: 1px;
+    position: relative;
+    z-index: 2;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 8px;
+    font-family: Oswald, sans-serif;
 }
 
-/* Cartes (Sections sombres) */
+/* Cartes (Sections transparentes avec bordures légères) */
 .card {
-    background-color: #1a1a1d; /* Noir bleuté très sombre */
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
     padding: 40px 20px;
     margin-bottom: 30px;
-    border-radius: 4px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: none;
+    transition: none;
+    font-family: Oswald, sans-serif;
 }
 
 .card h2 {
@@ -46,11 +74,13 @@ h1 {
     font-size: 1.6rem;
     margin-bottom: 40px;
     font-weight: 400;
+    font-family: Oswald, sans-serif;
 }
 
 .contact-text {
     font-size: 1.2rem;
     color: #cccccc;
+    font-family: Oswald, sans-serif;
 }
 
 /* Style du Formulaire */
@@ -64,58 +94,50 @@ h1 {
 
 .contact-form input, 
 .contact-form textarea {
-    background-color: #2b2b2b;
-    border: 1px solid #444;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     color: white;
-    padding: 12px;
-    border-radius: 4px;
-    font-family: inherit;
+    padding: 12px 0;
+    border-radius: 0px;
+    font-family: Oswald, sans-serif;
+    font-size: 1rem;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    font-family: Oswald, sans-serif;
 }
 
 .contact-form button {
-    background-color: #ff8c00;
+    background-color: transparent;
     color: white;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     padding: 12px;
     font-weight: bold;
     cursor: pointer;
-    border-radius: 4px;
-    transition: background 0.3s, transform 0.3s;
-}
-.contact-form button:hover {
-    background-color: #e67e00;
-    transform: scale(1.05);
+    border-radius: 0px;
+    transition: none;
+    margin-top: 20px;
+    font-family: Oswald, sans-serif;
 }
 
-/* Cards and inputs animations */
-.card {
-    background-color: #1a1a1d; /* Noir bleuté très sombre */
-    padding: 40px 20px;
-    margin-bottom: 30px;
-    border-radius: 4px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    transition: transform 0.4s, box-shadow 0.4s;
+.contact-form button:hover {
+    background-color: transparent;
+    transform: none;
 }
 
 .card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    transform: none;
+    box-shadow: none;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
     outline: none;
-    border-color: #ff8c00;
-    transform: scale(1.02);
-}
-
-/* make container responsive */
-.container {
-    max-width: 800px;
-    margin: 40px auto;
-    text-align: center;
-    padding: 0 20px;
-    width: 90%;
+    border-bottom-color: rgba(255, 255, 255, 0.6);
+    transform: none;
 }
 
 /* headings animation */
@@ -140,16 +162,15 @@ h1, h2 {
     }
 }
 
-.contact-form button:hover {
-    background-color: #e67e00;
-}
-
 /* Footer */
 footer {
     margin-top: 100px;
     padding: 20px;
     text-align: center;
     color: #aaaaaa;
+    position: relative;
+    z-index: 2;
+    background-color: #222222;
 }
 
 .footer-line {
@@ -183,4 +204,27 @@ footer {
 
 .copyright {
     font-size: 0.65rem;
+}
+
+@keyframes smoke-move {
+    0% {
+        transform: translateX(-50%) translateY(0px);
+        opacity: 0.2;
+    }
+    25% {
+        transform: translateX(-45%) translateY(-40px);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translateX(-50%) translateY(-80px);
+        opacity: 0.6;
+    }
+    75% {
+        transform: translateX(-55%) translateY(-40px);
+        opacity: 0.4;
+    }
+    100% {
+        transform: translateX(-50%) translateY(0px);
+        opacity: 0.2;
+    }
 }
