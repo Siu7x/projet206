@@ -3,60 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>206RT - Contact et Sponsoring</title>
+    <title>206RT — Contact</title>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Oswald:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/contact.css">
-    <link rel="stylesheet" href="../css/nav.css">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <!-- navigation identique à index.html -->
+    <div class="bg-blur"></div>
+    <div class="bg-vignette"></div>
+ 
+    <!-- NAV -->
     <nav class="site-nav">
         <div class="site-nav-inner">
-            <div class="brand">206RT</div>
+            <a href="../html/index.html" class="brand">206RT</a>
             <div class="site-links">
                 <a href="../html/index.html" class="nav-link">Accueil</a>
-                <a href="../html/equipe.html" class="nav-link">Equipe</a>
+                <a href="../html/equipe.html" class="nav-link">Équipe</a>
                 <a href="../html/calendrier.html" class="nav-link">Calendrier</a>
                 <a href="../html/contact.html" class="nav-link active">Contact</a>
             </div>
         </div>
         <div class="ligne-blanche-head"></div>
     </nav>
-
-    <main class="container">
-        <h1>CONTACT ET SPONSORING</h1>
-
-        <section class="card">
-            <h2>DEVENEZ SPONSORT</h2>
-            <p class="contact-text">contact</p>
-        </section>
-
-        <section class="card">
-            <h2>formulaire de contact (mail)</h2>
-            <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
-                <input type="hidden" name="access_key" value="82d3062d-ce69-43b0-bf91-a0202d378032">
-                
-                <input type="text" name="name" placeholder="Votre nom" required>
-                <input type="email" name="email" placeholder="Votre email" required>
-                <textarea name="message" rows="5" placeholder="Votre message" required></textarea>
-                
-                <button type="submit">Envoyer</button>
-            </form>
-        </section>
+ 
+    <!-- MAIN -->
+    <main class="main-content">
+        <div class="contact-card">
+ 
+            <span class="fig-label">(Fig.2)</span>
+ 
+            <div class="form-box">
+                <span class="label-tag">sponsoring &amp; contact</span>
+                <h2>Devenez<br><em>Partenaire</em></h2>
+                <div class="divider-line"></div>
+                <p class="contact-sub">formulaire de contact</p>
+ 
+                <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+                    <input type="hidden" name="access_key" value="82d3062d-ce69-43b0-bf91-a0202d378032">
+                    <input type="text"  name="name"    placeholder="Votre nom"     required>
+                    <input type="email" name="email"   placeholder="Votre email"   required>
+                    <textarea           name="message" placeholder="Votre message" rows="3" required></textarea>
+                    <button type="submit">Envoyer →</button>
+                </form>
+            </div>
+ 
+            <span class="img-caption">[ 02 — 05 ]</span>
+        </div>
     </main>
-
-    <footer>
-        <hr class="footer-line">
-        <ul class="footer-links">
-            <li><a href="#">ACCUEIL</a></li>
-            <li><a href="#">EQUIPE</a></li>
-            <li><a href="#">CALENDRIER</a></li>
-        </ul>
-        <div class="footer-logo">206RT</div>
-        <p class="copyright">© 2025 par Nathan GRUNEWALD mon amoureux</p>
+ 
+    <!-- FOOTER -->
+    <footer class="footer-bottom">
+        <nav class="footer-links">
+            <a href="index.html">ACCUEIL</a>
+            <a href="equipe.html">EQUIPE</a>
+            <a href="calendrier.html">CALENDRIER</a>
+            <a href="contact.html" class="active">CONTACT</a>
+        </nav>
+        <div class="footer-brand-row">
+            <span class="brand-name">206RT</span>
+            <span class="legal">© 2026 par Nathan GRUNEWALD</span>
+        </div>
     </footer>
-
-    <script src="../js/contact.js"></script>
+ 
 </body>
 </html>
