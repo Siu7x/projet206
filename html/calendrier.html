@@ -1,22 +1,212 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Mon Calendrier Rallye</title>
-    <style>
-        body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
-        .card { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; shadow: 2px 2px 5px rgba(0,0,0,0.1); }
-        h1 { color: #e63946; }
-    </style>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/images/logo206.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700;900&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <title>206RT — Calendrier</title>
+  <link rel="stylesheet" href="/css/nav.css" />
+  <link rel="stylesheet" href="/css/equipe.css" />
+  <link rel="stylesheet" href="/css/calendrier.css" />
 </head>
-<body>
-    <h1>Calendrier FFSA - Rallye</h1>
-    
-    {% for rallye in rallyes %}
-    <div class="card">
-        <strong>{{ rallye.date }}</strong> : {{ rallye.nom }}
-    </div>
-    {% endfor %}
+<body class="{% if is_admin %}admin-mode{% endif %}">
 
+  <div class="grain-overlay"></div>
+
+  <nav class="site-nav">
+    <div class="site-nav-inner">
+      <a href="/" class="brand">206RT</a>
+      <div class="site-links">
+        <a href="/" class="nav-link">Accueil</a>
+        <a href="/equipe" class="nav-link">Équipe</a>
+        <a href="/calendrier" class="nav-link active">Calendrier</a>
+        <a href="/contact" class="nav-link">Contact</a>
+      </div>
+    </div>
+    <div class="ligne-blanche-head"></div>
+  </nav>
+
+  <main class="calendrier-section">
+    <h1 class="section-title">Calendrier <span>2026</span></h1>
+    
+    <div class="controls-container">
+        <div class="search-container">
+            <input type="text" id="search-input" class="search-input" placeholder="Rechercher une course...">
+        </div>
+        <button id="toggle-add-btn" class="toggle-add-btn" style="{% if not is_admin %}display: none;{% endif %}">+ Nouvelle Course</button>
+    </div>
+
+    <form id="add-race-form" class="add-race-form" style="display: none;">
+        <div class="form-group">
+            <input type="text" id="input-date" class="form-input" placeholder="Date (ex: 18 - 19 Avril)" required>
+            <input type="text" id="input-name" class="form-input" placeholder="Nom de la course" required>
+            <input type="text" id="input-type" class="form-input" placeholder="Type (ex: Slalom Régional)" required>
+        </div>
+        <button type="submit" class="submit-race-btn">Ajouter au calendrier</button>
+    </form>
+
+    <div class="race-list">
+        {% for race in races %}
+        <div class="race-card" data-id="{{ race.id }}">
+            <button class="delete-btn" title="Supprimer la course">&times;</button>
+            <div class="race-date">{{ race.date }}</div>
+            <div class="race-name">{{ race.name }}</div>
+            <div class="race-type">{{ race.type }}</div>
+        </div>
+        {% else %}
+        <p style="color: var(--muted); font-family: var(--font-body);">Aucune course dans le calendrier pour le moment.</p>
+        {% endfor %}
+    </div>
+  </main>
+
+  <footer class="footer-bottom">
+    <nav class="footer-links">
+      <a href="/">Accueil</a>
+      <a href="/equipe">Équipe</a>
+      <a href="/calendrier" class="active">Calendrier</a>
+      <a href="/contact">Contact</a>
+    </nav>
+    <div class="footer-brand">
+      <p class="brand-name" id="admin-login" title="Accès Admin" style="cursor: pointer;">206RT</p>
+      <p class="legal">© 2026 par Nathan GRUNEWALD</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const searchInput = document.getElementById('search-input');
+      const addForm = document.getElementById('add-race-form');
+      const formBtn = document.getElementById('toggle-add-btn');
+      const raceList = document.querySelector('.race-list');
+
+      // --- Mode Admin (Connexion Secrète) ---
+      const isAdmin = {{ 'true' if is_admin else 'false' }};
+      
+      const adminLogin = document.getElementById('admin-login');
+      if (adminLogin) {
+          adminLogin.addEventListener('dblclick', async () => {
+              if (isAdmin) {
+                  if (confirm('Voulez-vous vous déconnecter du mode Admin ?')) {
+                      await fetch('/api/logout', { method: 'POST' });
+                      window.location.reload();
+                  }
+              } else {
+                  const pwd = prompt('Zone Administrateur. Entrez le mot de passe :');
+                  if (pwd) {
+                      const res = await fetch('/api/login', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ password: pwd })
+                      });
+                      if (res.ok) window.location.reload();
+                      else alert('Mot de passe incorrect.');
+                  }
+              }
+          });
+      }
+      
+      // --- Logique de filtrage ---
+      searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        document.querySelectorAll('.race-card').forEach(card => {
+          const raceName = card.querySelector('.race-name').textContent.toLowerCase();
+          card.style.display = raceName.includes(term) ? 'flex' : 'none';
+        });
+      });
+      
+      // --- Animation au scroll (Intersection Observer) ---
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => entry.target.classList.add('visible'), index * 100);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.race-card').forEach(card => observer.observe(card));
+
+      // --- Gérer l'affichage du formulaire d'ajout ---
+      formBtn.addEventListener('click', () => {
+        const isHidden = addForm.style.display === 'none' || addForm.style.display === '';
+        addForm.style.display = isHidden ? 'flex' : 'none';
+        formBtn.textContent = isHidden ? '- Fermer le formulaire' : '+ Nouvelle Course';
+      });
+
+      // --- Fonctions ---
+      function createRaceCard(race) {
+        const card = document.createElement('div');
+        card.className = 'race-card';
+        card.dataset.id = race.id;
+        card.innerHTML = `
+            <button class="delete-btn" title="Supprimer la course">&times;</button>
+            <div class="race-date">${race.date}</div>
+            <div class="race-name">${race.name}</div>
+            <div class="race-type">${race.type}</div>
+        `;
+        return card;
+      }
+
+      // --- Soumission du formulaire pour AJOUTER une course ---
+      addForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const raceData = {
+          date: document.getElementById('input-date').value,
+          name: document.getElementById('input-name').value,
+          type: document.getElementById('input-type').value,
+        };
+
+        try {
+          const response = await fetch('/api/races', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(raceData),
+          });
+
+          if (!response.ok) throw new Error('Erreur lors de l\'ajout');
+
+          const newRace = await response.json();
+          const newCard = createRaceCard(newRace);
+          raceList.appendChild(newCard);
+          observer.observe(newCard);
+
+          addForm.reset();
+          addForm.style.display = 'none';
+          formBtn.textContent = '+ Nouvelle Course';
+
+        } catch (error) {
+          console.error('Erreur:', error);
+          alert('Impossible d\'ajouter la course.');
+        }
+      });
+
+      // --- Clic pour SUPPRIMER une course (délégation d'événement) ---
+      raceList.addEventListener('click', async (e) => {
+        if (isAdmin && e.target.classList.contains('delete-btn')) {
+          const card = e.target.closest('.race-card');
+          const raceId = card.dataset.id;
+
+          if (confirm('Voulez-vous vraiment supprimer cette course ?')) {
+            try {
+              const response = await fetch(`/api/races/${raceId}`, {
+                method: 'DELETE',
+              });
+
+              if (!response.ok) throw new Error('Erreur de suppression');
+              
+              card.style.transition += ', transform 0.5s ease, opacity 0.5s ease';
+              card.style.opacity = 0;
+              card.style.transform = 'translateX(-100px)';
+              setTimeout(() => card.remove(), 500);
+
+            } catch (error) {
+              console.error('Erreur:', error);
+              alert('Impossible de supprimer la course.');
+            }
+          }
+        }
+      });
+    });
+  </script>
 </body>
 </html>

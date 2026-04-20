@@ -33,6 +33,7 @@
     text-transform: uppercase;
     letter-spacing: 0.12em; /* tracking-widest */
     font-weight: 700;
+    font-family: 'Oswald', sans-serif;
 }
 
 .site-links .nav-link {

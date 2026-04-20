@@ -1,0 +1,195 @@
+.calendrier-section {
+    padding: 120px 5vw 8vh;
+    min-height: 100vh;
+}
+.section-title {
+    font-family: var(--font);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 3rem;
+    line-height: 1;
+}
+.section-title span {
+    color: var(--orange);
+}
+.controls-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+.search-container {
+    margin: 0;
+    flex: 1;
+    min-width: 250px;
+    max-width: 400px;
+}
+.search-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    padding: 10px 0;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+    font-family: var(--font);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+.search-input:focus {
+    border-bottom-color: var(--orange);
+}
+.toggle-add-btn {
+    background: transparent;
+    border: 1px solid var(--orange);
+    color: var(--orange);
+    font-family: var(--font);
+    text-transform: uppercase;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.toggle-add-btn:hover {
+    background: var(--orange);
+    color: var(--black);
+}
+.add-race-form {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.form-group {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+.form-input {
+    flex: 1;
+    min-width: 200px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    padding: 10px 0;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+.form-input:focus {
+    border-bottom-color: var(--orange);
+}
+.submit-race-btn {
+    align-self: flex-start;
+    background: var(--orange);
+    color: var(--black);
+    border: none;
+    padding: 12px 30px;
+    font-family: var(--font);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.submit-race-btn:hover {
+    background: var(--white);
+    transform: translateY(-2px);
+}
+.race-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+.race-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out, border-color 0.3s;
+}
+.race-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.race-card.visible:hover {
+    transform: translateY(-5px);
+    border-color: var(--orange);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.race-date {
+    font-family: var(--font);
+    color: var(--orange);
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+.race-name {
+    font-family: var(--font);
+    color: var(--white);
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.race-type {
+    font-family: var(--font-body);
+    color: var(--muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.delete-btn {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 26px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.delete-btn:hover {
+    background: var(--orange);
+    color: var(--black);
+    transform: scale(1.1);
+    border-color: var(--orange);
+}
+.admin-mode .delete-btn {
+    display: block;
+}
