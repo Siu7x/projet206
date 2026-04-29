@@ -1,411 +1,250 @@
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── CONFIGURATION GÉNÉRALE ── */
+*, *::before, *::after { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
 
 :root {
-  --orange: #F97316;
-  --bg: #000000;
-  --white: #ffffff;
-  --muted: rgba(255,255,255,0.45);
-  --border: rgba(255,255,255,1);
-  --font: 'Oswald', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+    --orange: #F97316;
+    --bg: #000000;
+    --white: #ffffff;
+    --muted: rgba(255,255,255,0.45);
+    --font: 'Oswald', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
 }
-
-html { scroll-behavior: smooth; }
 
 body {
-  background-color: var(--bg);
-  color: var(--white);
-  font-family: var(--font-body);
-  font-weight: 300;
-  line-height: 1.7;
-  overflow-x: hidden;
-  cursor: auto;
+    background-color: var(--bg);
+    color: var(--white);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    line-height: 1.6;
 }
 
-a, button { cursor: pointer; }
-
-/* ── LIGNE SÉPARATRICE (identique index) ── */
+/* ── COMPOSANTS RÉUTILISABLES ── */
 .ligne-blanche {
-  width: 95%;
-  height: 3px;
-  background-color: var(--white);
-  margin: 82px auto;
+    width: 95%;
+    height: 1px;
+    background-color: rgba(255,255,255,0.2);
+    margin: 60px auto;
 }
 
-/* ── HERO ── */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 0 5vw 8vh;
-  position: relative;
-  overflow: hidden;
-  background-color: var(--bg);
+/* ── HERO HEADER (SYSTÈME DE MASQUE) ── */
+.base-header {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
 }
 
-.hero-eyebrow {
-  font-family: var(--font);
-  font-size: 11px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 2rem;
+/* Couche de fond : La voiture */
+.layer-car {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
 }
 
-/* Titre contour blanc — même style que prenom-pilote dans index */
-.hero-title {
-  font-family: var(--font);
-  font-size: clamp(3.5rem, 13vw, 14rem);
-  font-weight: 900;
-  line-height: 0.88;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
-  margin-bottom: 3rem;
+.photo-voiture {
+    width: 100%;
+    height: 100%;
+    background: url('../img/voiture-hero.jpg') center/cover no-repeat; /* Ajuste le chemin */
+    filter: brightness(0.6);
 }
 
-.hero-outline {
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--white);
-  text-stroke: 1.5px var(--white);
+/* Conteneur du masque orange + visage + nom */
+#mask-reveal {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    clip-path: circle(0% at 50% 50%); /* Animé par JS */
+    transition: clip-path 0.1s ease-out;
 }
 
-.hero-orange {
-  color: var(--orange);
+.layer-orange {
+    position: absolute;
+    inset: 0;
+    background-color: var(--orange);
+    z-index: 11;
 }
 
-.hero-desc {
-  font-family: var(--font);
-  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  max-width: 380px;
-  mix-blend-mode: difference;
-}
-
-.hero-scroll-indicator {
-  position: absolute;
-  right: 2.5rem;
-  bottom: 6rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.scroll-line {
-  width: 1px;
-  height: 60px;
-  background: rgba(255,255,255,0.3);
-  animation: scrollPulse 2s ease-in-out infinite;
-}
-
-@keyframes scrollPulse {
-  0%, 100% { opacity: 0.3; transform: scaleY(1); }
-  50%       { opacity: 1;   transform: scaleY(0.6); }
-}
-
-.scroll-text {
-  font-family: var(--font);
-  font-size: 9px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--muted);
-  writing-mode: vertical-rl;
-}
-
-/* ── SECTION LABEL ── */
-.section-label {
-  font-family: var(--font);
-  font-size: 10px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 5rem;
-}
-
-/* ── MEMBRES ── */
-.membres {
-  padding: 0 5vw;
-}
-
-.membre-item {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 70vh;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.membre-item.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.membre-item.reverse .membre-img { order: 2; }
-.membre-item.reverse .membre-info { order: 1; }
-
-.membre-img {
-  position: relative;
-  overflow: hidden;
-}
-
-.membre-img img {
-  width: 100%;
-  height: 100%;
-  min-height: 500px;
-  object-fit: cover;
-  display: block;
-  filter: grayscale(30%) brightness(0.85);
-  transition: filter 0.6s ease, transform 0.7s ease;
-}
-
-.membre-item:hover .membre-img img {
-  filter: grayscale(0%) brightness(1);
-  transform: scale(1.04);
-}
-
-.membre-num {
-  position: absolute;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  font-family: var(--font);
-  font-size: clamp(4rem, 8vw, 7rem);
-  font-weight: 900;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255,255,255,0.25);
-  text-stroke: 1px rgba(255,255,255,0.25);
-  line-height: 1;
-  user-select: none;
-  pointer-events: none;
-}
-
-.membre-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 4rem 5vw;
-  background-color: var(--bg);
-}
-
-.membre-role {
-  font-family: var(--font);
-  font-size: 20px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 1.5rem;
-}
-
-.membre-name {
-  font-family: var(--font);
-  font-size: clamp(2.8rem, 5vw, 5rem);
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  line-height: 0.9;
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--white);
-  text-stroke: 1.5px var(--white);
-  margin-bottom: 0;
-  transition: color 0.4s, -webkit-text-stroke 0.4s;
-}
-
-.membre-item:hover .membre-name {
-  color: var(--white);
-  -webkit-text-stroke: 0px;
-}
-
-.membre-sep {
-  width: 40px;
-  height: 3px;
-  background: var(--orange);
-  margin: 2.5rem 0;
-}
-
-.membre-desc {
-  font-family: var(--font);
-  font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--muted);
-  max-width: 400px;
-  line-height: 1.6;
-}
-
-/* ── LINKEDIN LINK ── */
-.linkedin-link {
-  display: inline-block;
-  margin-top: 1.5rem;
-  font-family: var(--font);
-  font-size: 0.95rem;
-  color: var(--orange);
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  transition: color 0.3s ease;
-}
-.linkedin-link:hover {
-  color: var(--white);
-}
-
-/* ── SOCIAL ── */
-.social-section {
-    padding: 80px 40px;
-    text-align: center;
-    background-color: #000000;
-    opacity: 1;
-}
-
-.social-label {
-    font-size: 19px;
-    letter-spacing: 0.2em;
-    color: rgba(255, 255, 255, 0.4);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    font-family: 'Oswald', sans-serif;
-    opacity: 1;
-}
-
-.social-title {
-    font-size: 62px;
-    font-weight: 500;
-    color: #ffffff;
-    margin-bottom: 4px;
-    letter-spacing: -0.02em;
-    font-family: 'Oswald', sans-serif;
-    opacity: 1;
-}
-
-.divider {
-    width: 32px;
-    height: 0.5px;
-    background: rgba(255, 255, 255, 0.2);
-    margin: 16px auto 40px;
-}
-
-.social-grid {
+.layer-name {
+    position: absolute;
+    inset: 0;
     display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 46px;
-    flex-wrap: wrap;
-    opacity: 1;
+    z-index: 13;
 }
 
+.prenom-pilote {
+    font-family: var(--font);
+    font-size: clamp(4rem, 15vw, 15rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 2px white;
+    white-space: nowrap;
+}
+
+.layer-head {
+    position: absolute;
+    inset: 0;
+    z-index: 12;
+}
+
+.photo-enzo {
+    width: 100%;
+    height: 100%;
+    background: url('../img/enzo-hero.png') center/cover no-repeat; /* Ajuste le chemin */
+}
+
+/* Petite description en bas à gauche du hero */
+.description-head-container {
+    position: absolute;
+    bottom: 40px;
+    left: 5vw;
+    z-index: 20;
+    max-width: 400px;
+}
+
+.description-head {
+    font-family: var(--font);
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: white;
+}
+
+/* ── SECTION TEXTE PILOTE ── */
+.hero-content-section {
+    padding: 100px 5vw;
+    text-align: center;
+}
+
+.pilote {
+    font-family: var(--font);
+    font-size: clamp(2rem, 5vw, 4rem);
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 20px;
+}
+
+.description {
+    font-family: var(--font);
+    font-size: clamp(1.2rem, 3vw, 2.2rem);
+    max-width: 900px;
+    margin: 0 auto;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+/* ── SECTION 3D ── */
+.model-3d-title {
+    font-family: var(--font);
+    font-size: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+}
+
+.model-3d-container {
+    width: 100%;
+    height: 600px; /* Hauteur pour le rendu Three.js */
+    background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
+}
+
+/* ── SPONSORS (MARQUEE) ── */
+.sponsors-section { padding: 60px 0; }
+
+.sponsors-title {
+    font-family: var(--font);
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.marquee-wrapper {
+    overflow: hidden;
+    padding: 40px 0;
+    display: flex;
+}
+
+.marquee-content {
+    display: flex;
+    gap: 80px;
+    animation: scrollMarquee 30s linear infinite;
+}
+
+@keyframes scrollMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.sponsor-logo {
+    height: 60px;
+    width: auto;
+    filter: grayscale(1) brightness(2);
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+.sponsor-logo:hover { opacity: 1; filter: grayscale(0) brightness(1); }
+
+/* ── SOCIAL & FOOTER (IDENTIQUE EQUIPE) ── */
+.social-section { padding: 80px 5vw; text-align: center; }
+.social-label { font-family: var(--font); color: var(--orange); letter-spacing: 0.2em; text-transform: uppercase; }
+.social-title { font-family: var(--font); font-size: clamp(2.5rem, 6vw, 60px); text-transform: uppercase; }
+.divider { width: 40px; height: 2px; background: var(--orange); margin: 20px auto 40px; }
+
+.social-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
 .social-card {
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 15px;
+    min-width: 160px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
-    padding: 28px 36px;
-    border: 0.5px solid rgb(255, 255, 255);
-    border-radius: 12px;
-    background: transparent;
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-    font-size: 28px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-family: 'Oswald', sans-serif;
-    transition: border-color 0.2s, color 0.2s;
-    opacity: 1;
-    min-width: 120px;
+    gap: 15px;
+    color: white;
+    font-family: var(--font);
+    transition: 0.3s;
 }
+.social-card:hover { background: rgba(255,255,255,0.05); border-color: var(--orange); }
+.social-card img { width: 40px; }
 
-.social-card img {
-    width: 58px;
-    height: 68px;
-    object-fit: contain;
-    opacity: 1;
-    transition: opacity 0.2s;
+.footer-bottom { padding: 60px 5vw; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; }
+.footer-links { display: flex; justify-content: center; gap: 30px; margin-bottom: 30px; }
+.footer-links a { font-family: var(--font); font-size: 12px; color: var(--muted); }
+.footer-links a.active { color: white; }
+.brand-name { font-family: var(--font); font-size: 8vw; font-weight: 900; opacity: 0.1; }
+
+/* ── RESPONSIVE TABLETTE & MOBILE (< 1024px) ── */
+@media (max-width: 1024px) {
+    /* Évite que l'image du hero ne soit bizarre sur tablette */
+    .base-header { height: 80vh; }
+    
+    .prenom-pilote {
+        -webkit-text-stroke: 1px white;
+        font-size: 18vw;
+        flex-direction: column;
+        display: flex;
+        line-height: 1;
+    }
+
+    .description-head-container { bottom: 20px; max-width: 80%; }
+    
+    .social-grid { display: grid; grid-template-columns: 1fr 1fr; }
+    
+    .model-3d-container { height: 400px; }
 }
 
 @media (max-width: 600px) {
-    .social-section {
-        padding: 60px 20px;
-    }
-
-    .social-grid {
-        gap: 12px;
-    }
-
-    .social-card {
-        padding: 20px 24px;
-        min-width: 100px;
-    }
-}
-
-/* ── RESPONSIVE ── */
-@media (max-width: 900px) {
-  .social-grid { grid-template-columns: 1fr 1fr; }
-  .social-card { border-bottom: 1px solid rgba(255,255,255,0.12); }
-}
-
-@media (max-width: 768px) {
-  .site-nav-inner { 
-    padding: max(1.2rem, env(safe-area-inset-top)) max(1.5rem, env(safe-area-inset-right)) 1.2rem max(1.5rem, env(safe-area-inset-left)); 
-  }
-  .ligne-blanche { margin: 40px auto; }
-
-  .hero { 
-    padding: 15vh 6vw 5vh; 
-    min-height: auto; 
-  }
-  .hero-title { font-size: clamp(3.5rem, 15vw, 6rem); margin-bottom: 1rem; }
-  .hero-scroll-indicator { display: none; } /* Économise de l'espace sur mobile */
-
-  .membres { padding: 0 4vw 2rem; }
-  .section-label { margin-bottom: 2rem; font-size: 12px; }
-
-  /* Transformation en "Cartes Premium" pour mobile */
-  .membre-item {
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 100%);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 24px;
-    margin-bottom: 3.5rem;
-  }
-
-  .membre-item.reverse .membre-img,
-  .membre-item.reverse .membre-info { order: unset; }
-
-  .membre-img {
-    border-radius: 24px 24px 0 0;
-  }
-
-  .membre-img img { 
-    min-height: 320px; 
-    height: 320px;
-    border-radius: 24px 24px 0 0;
-    filter: grayscale(10%) brightness(0.95); /* Affiche la couleur par défaut car pas de hover sur mobile */
-  }
-
-  .membre-num {
-    font-size: 5rem;
-    bottom: 1rem;
-    right: 1.5rem;
-    -webkit-text-stroke: 2px var(--orange);
-    color: rgba(0,0,0,0.4); /* Rendu vitreux / contrasté */
-    opacity: 1;
-  }
-
-  .membre-info { 
-    padding: 2.5rem 1.5rem; 
-    background: transparent;
-  }
-
-  .membre-name {
-    font-size: clamp(2.5rem, 9vw, 3.5rem);
-    line-height: 1;
-    color: var(--white); /* Blanc pur sur mobile pour la lisibilité */
-    -webkit-text-stroke: 0px;
-  }
-
-  .membre-sep { margin: 1.2rem 0; width: 40px; }
-  .membre-desc { font-size: 0.95rem; color: rgba(255,255,255,0.75); }
+    .social-grid { grid-template-columns: 1fr; }
+    .footer-links { flex-direction: column; gap: 15px; }
+    .brand-name { font-size: 15vw; }
 }
