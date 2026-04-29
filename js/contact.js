@@ -1,4 +1,4 @@
-const form = document.getElementById('form');
+const form = document.querySelector('.contact-form');
 const submitBtn = form.querySelector('button[type="submit"]');
 
 form.addEventListener('submit', async (e) => {
@@ -48,15 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Cards reveal on scroll
-    gsap.from(".card", {
+    gsap.from(".contact-card", {
         opacity: 0,
         y: 30,
-        stagger: 0.2,
-        scrollTrigger: {
-            trigger: ".card",
-            start: "top 85%",
-            end: "bottom 60%",
-            scrub: false
-        }
+        duration: 0.8,
+        ease: "power2.out"
     });
 });

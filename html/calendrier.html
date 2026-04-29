@@ -2,13 +2,13 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="/images/logo206.png" />
+  <link rel="icon" type="image/png" href="../images/logo206.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700;900&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
   <title>206RT — Calendrier</title>
-  <link rel="stylesheet" href="/css/nav.css" />
-  <link rel="stylesheet" href="/css/equipe.css" />
-  <link rel="stylesheet" href="/css/calendrier.css" />
+  <link rel="stylesheet" href="../css/nav.css" />
+  <link rel="stylesheet" href="../css/equipe.css" />
+  <link rel="stylesheet" href="../css/calendrier.css" />
 </head>
 <body class="{% if is_admin %}admin-mode{% endif %}">
 
@@ -16,12 +16,18 @@
 
   <nav class="site-nav">
     <div class="site-nav-inner">
-      <a href="/" class="brand">206RT</a>
+      <a href="index.html" class="brand">206RT</a>
       <div class="site-links">
-        <a href="/" class="nav-link">Accueil</a>
-        <a href="/equipe" class="nav-link">Équipe</a>
-        <a href="/calendrier" class="nav-link active">Calendrier</a>
-        <a href="/contact" class="nav-link">Contact</a>
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="equipe.html" class="nav-link">Équipe</a>
+        <a href="calendrier.html" class="nav-link active">Calendrier</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+      <!-- Bouton Burger pour mobile -->
+      <div class="burger-menu">
+          <span></span>
+          <span></span>
+          <span></span>
       </div>
     </div>
     <div class="ligne-blanche-head"></div>
@@ -62,14 +68,13 @@
 
   <footer class="footer-bottom">
     <nav class="footer-links">
-      <a href="/">Accueil</a>
-      <a href="/equipe">Équipe</a>
-      <a href="/calendrier" class="active">Calendrier</a>
-      <a href="/contact">Contact</a>
+      <a href="index.html">ACCUEIL</a>
+      <a href="equipe.html">ÉQUIPE</a>
+      <a href="calendrier.html" class="active">CALENDRIER</a>
+      <a href="contact.html">CONTACT</a>
     </nav>
-    <div class="footer-brand">
-      <p class="brand-name" id="admin-login" title="Accès Admin" style="cursor: pointer;">206RT</p>
-      <p class="legal">© 2026 par Nathan GRUNEWALD</p>
+    <div class="footer-brand-row">
+      <span class="brand-name" id="admin-login" title="Accès Admin" style="cursor: pointer;">206RT</span>
     </div>
   </footer>
 
@@ -208,5 +213,6 @@
       });
     });
   </script>
+  <script src="../js/nav.js"></script>
 </body>
 </html>

@@ -1,22 +1,27 @@
-/* Grain Pixel Permanent (Style Niko) */
+/* ── GRAIN EFFECT (pour la page d'accueil) ── */
 .grain-overlay {
     position: fixed;
     top: -50%; left: -50%; width: 200%; height: 200%;
     background-image: url('https://grainy-gradients.vercel.app/noise.svg');
-    opacity: 0.23;
+    opacity: 0.33;
     background-color: #000000;
     pointer-events: none;
     z-index: 100;
-    animation: grain-animation 1s steps(5) infinite;
-     
+    animation: grain-animation 100s steps(5) infinite;
 }
 
 @keyframes grain-animation {
-   0% { transform: translate(0, 0); }
-    50% { transform: translate(1%, 2%); }
-    100% { transform: translate(-1%, -1%); }
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-5%, -10%); }
+    20% { transform: translate(-15%, 5%); }
+    30% { transform: translate(7%, -25%); }
+    40% { transform: translate(-5%, 25%); }
+    50% { transform: translate(-15%, 10%); }
+    60% { transform: translate(15%, 0%); }
+    70% { transform: translate(0%, 15%); }
+    80% { transform: translate(3%, 35%); }
+    90% { transform: translate(-10%, 10%); }
 }
-
 .base-header {
     position: relative;
     height: 100vh;
@@ -76,24 +81,12 @@
 .description-head-container {
     position: absolute;
     top: 15vh;
-    left: 5vh;
+    left: 5vw;
     z-index: 50;
-    max-width: 280px;
+    max-width: clamp(200px, 80vw, 280px);
 }
 .description-head{
-    font-size: 1vw;
-    line-height: 1.5;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: white;
-    mix-blend-mode: difference;
-    font-family: Oswald, sans-serif;
-    z-index: -1;
-
-}
-/* Style des titres et descriptions en haut de page */
-.description-head{
-    font-size: 1vw;
+    font-size: clamp(0.85rem, 2.5vw, 1.2rem);
     line-height: 1.5;
     font-weight: 700;
     text-transform: uppercase;
@@ -104,9 +97,16 @@
 .photo-voiture {
     width: 100%;
     height: 100%;
-    background-image: url('../images/voiture.jpg');
+    background-image: url('../images/voiture-montage.webp');
     background-size: cover;
     background-position: center;
+    animation: carBreath 20s ease-in-out infinite;
+}
+
+@keyframes carBreath {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
 }
 .photo-enzo {
     position: absolute;
@@ -115,7 +115,7 @@
     transform: translateX(-50%);
     width: 85vw;              /* Largeur imposante pour l'effet visuel */
     height: 95vh;             /* Hauteur de l'image (85% de l'écran) */
-    background-image: url('../images/enzolum.png'); 
+    background-image: url('../images/enzolum.webp'); 
     background-size: contain;  /* EFFET : L'image n'est jamais déformée */
     background-position: center bottom; /* CAUSE : Aligne la base de l'image source au bas du bloc */
     background-repeat: no-repeat;
@@ -138,8 +138,8 @@
     font-family: 'Oswald', sans-serif !important;
     color: transparent;
     -webkit-text-stroke: 1.5px rgb(255, 255, 255);
-    text-stroke: 1.5px white;
-    font-size: 18vw;
+    text-stroke: 2.5px white;
+    font-size: clamp(3rem, 15vw, 18vw);
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: -0.05em;
@@ -188,9 +188,7 @@ h1 {
     opacity: 0.33;
     /* Crée le contour blanc fin (effet Niko/Webflow) */
     -webkit-text-stroke: 1px rgba(255, 255, 255, 5.0);
-    
     /* Optionnel : légère lueur pour la lisibilité */
-    filter: drop-shadow(30px 30px 150px rgba(0,0,0,0.3));
     font-family: Oswald, sans-serif;
     transition: transform 0.1s ease-out;
     z-index: 30;
@@ -230,32 +228,6 @@ a, button {
     cursor: pointer !important;
 }
 
-/* Animation de soulignement des liens au survol */
-.nav-link {
-    position: relative;
-    transition: opacity 0.3s ease;
-    font-family: Oswald, sans-serif;
-}
-
-.nav-link::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background-color: white;
-    transition: width 0.3s ease-in-out;
-}
-
-.nav-link:hover::after {
-    width: 100%;
-}
-
-.nav-link:hover {
-    opacity: 0.7;
-}
-
 /* Le masque de révélation (toujours actif en arrière-plan) */
 .visible-mask {
     position: absolute;
@@ -276,16 +248,6 @@ a, button {
     z-index: 30;
 }
 
-.nav-link::after {
-    content: "";
-    position: absolute;
-    bottom: -2px; left: 0; width: 0; height: 1px;
-    background-color: white;
-    transition: width 0.3s ease;
-}
-
-.nav-link:hover::after { width: 100%; }
-
 .hero-content-section {
     position: relative;
     z-index: 10;
@@ -305,12 +267,12 @@ a, button {
 
 /* Style du titre Pilote */
 .pilote {
-    font-size: 3rem;
+    font-size: clamp(1.8rem, 6vw, 3rem);
     font-weight: 900;
     color: white;
     font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
-    margin-bottom: 8rem; /* Espace entre le titre et la description */
+    margin-bottom: clamp(3rem, 10vw, 8rem);
 }
 .marquee-wrapper {
     background-color: #F97316;
@@ -325,14 +287,14 @@ a, button {
 }
 /* Style de la description (État initial éteint) */
 .description {
-    font-size: 2.875rem;
+    font-size: clamp(1.4rem, 5vw, 2.875rem);
     font-weight: 900;
     font-family: 'Oswald', sans-serif;
     text-align: center;
     text-transform: uppercase;
     line-height: 1.3;
     color: #444; /* Gris foncé par défaut, passera en blanc avec GSAP */
-    margin: 0 auto;
+    margin: 25vh auto;
 }
 
 /* Optimisation pour les mots générés par SplitType */
@@ -344,7 +306,7 @@ a, button {
 .model-3d-title{
     font-family: 'Oswald', sans-serif !important;
     color: white; 
-    font-size: 4vw;
+    font-size: clamp(1.5rem, 5vw, 3rem);
     text-transform: uppercase;
     text-align: center;
     margin-bottom: 20px;
@@ -358,7 +320,7 @@ a, button {
     background-color: #000000;
     position: relative;
     overflow: hidden;
-    margin-bottom: 550px;
+    margin-bottom: clamp(50px, 15vh, 550px);
 }
 
 canvas {
@@ -379,7 +341,7 @@ canvas {
     color: #ffffff; 
     letter-spacing: 0.5em; 
     text-transform: uppercase; 
-    font-size: 4vw; 
+    font-size: clamp(1.5rem, 5vw, 3rem);
     margin-bottom: 20px; 
     font-family: 'Oswald', sans-serif;
 }
@@ -397,7 +359,7 @@ canvas {
 .marquee-content {
     display: flex;
     gap: 100px; /* Espace entre chaque logo */
-    animation: scroll 30s linear infinite;
+    animation: scroll 25s linear infinite;
     width: max-content; /* Important pour ne pas tronquer le contenu */
 }
 
@@ -471,11 +433,11 @@ canvas {
     align-items: center;
     gap: 40px;
     padding: 28px 36px;
-    border: 0.5px solid rgba(255, 255, 255, 0.15);
+    border: 0.5px solid rgb(255, 255, 255);
     border-radius: 12px;
     background: transparent;
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgb(255, 255, 255);
     font-size: 28px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -484,21 +446,13 @@ canvas {
     min-width: 120px;
 }
 
-.social-card:hover {
-    border-color: rgba(255, 255, 255, 0.5);
-    color: #ffffff;
-}
 
 .social-card img {
     width: 58px;
     height: 68px;
     object-fit: contain;
-    opacity: 0.6;
-    transition: opacity 0.2s;
-}
-
-.social-card:hover img {
     opacity: 1;
+    transition: opacity 0.2s;
 }
 
 @media (max-width: 600px) {
@@ -556,4 +510,64 @@ canvas {
 .legal {
     color: #ffffff;
     font-size: 0.7rem;
+}
+
+@media (max-width: 768px) {
+    /* On supprime le masque sur mobile pour que l'image et l'orange soient bien visibles */
+    .visible-mask {
+        -webkit-mask-image: none !important;
+        mask-image: none !important;
+    }
+
+    /* Amélioration de la lisibilité du texte d'intro sur mobile */
+    .description-head-container {
+        top: 130px; /* S'assure qu'il ne rentre pas en collision avec la navigation */
+        left: 1rem;
+    }
+    .description-head {
+        font-size: 1rem; /* On force une taille minimum de 16px (1rem) pour le confort de lecture */
+        mix-blend-mode: normal; /* On désactive le blend-mode qui peut rendre le texte illisible sur la photo */
+        text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5); /* Ajout d'une ombre forte pour le détacher du fond */
+    }
+
+    /* Amélioration de la visibilité du prénom Enzo Ragni */
+    .layer-name {
+        bottom: 45%; /* Remonte le texte au milieu pour le placer juste au-dessus du casque */
+    }
+
+    .hero-content-section {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        min-height: auto;
+        padding-top: 10vh;
+    }
+    .model-3d-container {
+        height: 38vh; /* Hauteur réduite pour correspondre à la nouvelle taille */
+        margin-bottom: 40px;
+    }
+    
+    /* Dézoome la voiture 3D pour qu'elle tienne mieux sur l'écran étroit */
+    .model-3d-container canvas {
+        transform: scale(0.85); /* Légèrement agrandi selon votre demande */
+        transform-origin: center center;
+    }
+    .sponsors-title {
+        letter-spacing: 0.1em;
+    }
+    .marquee-content {
+        gap: 30px;
+    }
+    .sponsor-logo {
+        height: 65px;
+    }
+    .social-title {
+        font-size: 42px;
+    }
+    .ligne-blanche {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .pilote {
+        margin-bottom: 2rem;
+    }
 }

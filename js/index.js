@@ -3,14 +3,14 @@ const mask = document.querySelector('.visible-mask');
 const name = document.getElementById('hero-name');
 
 document.addEventListener('mousemove', (e) => {
+    // Désactiver l'effet de masque "souris" sur mobile pour éviter les bugs
+    if (window.innerWidth <= 768) return;
+
     const x = e.clientX;
     const y = e.clientY;
 
     if (mask) {
-        // Crée un trou transparent de 250px autour de la souris
-        // transparent 0% -> C'est le centre (on voit la voiture)
-        // black 20% -> On commence à voir Enzo (contour flou progressif)
-        const maskStyle = `radial-gradient(circle 350px at ${x}px ${y}px, transparent 0%, black 20%)`;
+        const maskStyle = `radial-gradient(circle 750px at ${x}px ${y}px, transparent 0%, black 20%)`;
         
         mask.style.webkitMaskImage = maskStyle;
         mask.style.maskImage = maskStyle;
@@ -19,7 +19,7 @@ document.addEventListener('mousemove', (e) => {
 
 // Parallaxe simple
 window.addEventListener('scroll', () => {
-    if(name) {
+    if (name) {
         name.style.transform = `translateY(${window.scrollY * -0.4}px)`;
     }
 });
@@ -47,17 +47,4 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     );
-});
-
-
-document.addEventListener('mousemove', (e) => {
-    const mask = document.querySelector('.visible-mask');
-    if (mask) {
-        // Mise à jour fluide avec GSAP (ou direct avec style.setProperty)
-        gsap.to(mask, {
-            '--x': e.clientX + '100px',
-            duration: 0.1, // Très court pour la réactivité
-            ease: "none"
-        });
-    }
 });

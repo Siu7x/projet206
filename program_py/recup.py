@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 import os
 
 # --- Configuration ---
@@ -8,9 +11,23 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__, template_folder='../html', static_folder='../', static_url_path='')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'races.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = 'cle_secrete_206rt' # Requis pour utiliser les sessions sécurisées
+# Sécurité : Utiliser une variable d'environnement en production
+app.secret_key = os.environ.get('SECRET_KEY', 'cle_secrete_206rt_dev')
+
+# --- Configuration de Sécurité ---
+app.config['SESSION_COOKIE_HTTPONLY'] = True # Empêche l'accès au cookie via JavaScript (protection XSS)
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax' # Protection contre les failles CSRF
+# app.config['SESSION_COOKIE_SECURE'] = True # À DÉCOMMENTER EN PRODUCTION : Force le cookie à n'être envoyé qu'en HTTPS
 
 db = SQLAlchemy(app)
+
+# --- Configuration du Rate Limiting ---
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=["200 per day", "50 per hour"], # Limites globales par défaut
+    storage_uri="memory://" # Stocke le comptage en mémoire vive (idéal pour commencer)
+)
 
 # --- Modèle de Données ---
 class Race(db.Model):
@@ -50,13 +67,25 @@ def init_db():
 def index():
     return render_template('index.html')
 
+@app.route('/index.html')
+def index_redirect():
+    return redirect(url_for('index'), code=301) # 301 = Redirection Permanente (Bon pour le SEO)
+
 @app.route('/equipe')
 def equipe():
     return render_template('equipe.html')
 
+@app.route('/equipe.html')
+def equipe_redirect():
+    return redirect(url_for('equipe'), code=301)
+
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
+@app.route('/contact.html')
+def contact_redirect():
+    return redirect(url_for('contact'), code=301)
 
 @app.route('/calendrier')
 def calendrier():
@@ -64,11 +93,52 @@ def calendrier():
     is_admin = session.get('is_admin', False)
     return render_template('calendrier.html', races=all_races, is_admin=is_admin)
 
+@app.route('/calendrier.html')
+def calendrier_redirect():
+    return redirect(url_for('calendrier'), code=301)
+
+# --- SEO : Sitemap et Robots.txt ---
+@app.route('/sitemap.xml')
+def sitemap():
+    pages = ['index', 'equipe', 'contact', 'calendrier']
+    base_url = request.host_url[:-1] # Récupère l'URL de base (ex: https://ton-site.com)
+    xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    for page in pages:
+        xml += f'  <url>\n    <loc>{base_url}{url_for(page)}</loc>\n  </url>\n'
+    xml += '</urlset>'
+    return xml, 200, {'Content-Type': 'application/xml'}
+
+@app.route('/robots.txt')
+def robots():
+    base_url = request.host_url[:-1]
+    text = f"User-agent: *\nAllow: /\n\nSitemap: {base_url}/sitemap.xml"
+    return text, 200, {'Content-Type': 'text/plain'}
+
+# --- Sécurité : En-têtes HTTP ---
+@app.after_request
+def add_security_headers(response):
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['X-Frame-Options'] = 'SAMEORIGIN'
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    # HSTS : Force le navigateur à communiquer exclusivement en HTTPS
+    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+    return response
+
 # --- API Authentification (Mot de passe Admin) ---
 @app.route('/api/login', methods=['POST'])
+@limiter.limit("5 per minute") # Sécurité : Max 5 essais par minute par IP
 def login():
     data = request.get_json()
-    if data and data.get('password') == 'enzo2026': # Le mot de passe secret
+    
+    # Sécurité : On récupère le hash du mot de passe depuis l'environnement
+    admin_password_hash = os.environ.get('ADMIN_PASSWORD_HASH')
+    
+    # Fallback pour le développement local si le hash n'est pas encore défini dans le .env
+    if not admin_password_hash:
+        old_password = os.environ.get('ADMIN_PASSWORD', 'enzo2026')
+        admin_password_hash = generate_password_hash(old_password)
+        
+    if data and check_password_hash(admin_password_hash, data.get('password', '')):
         session['is_admin'] = True
         return jsonify({'success': True})
     return jsonify({'error': 'Mot de passe incorrect'}), 401
@@ -102,4 +172,6 @@ def delete_race(id):
 
 if __name__ == '__main__':
     init_db() # Exécute la création de la base de données automatiquement !
-    app.run(debug=True, port=5001)
+    # Sécurité : Désactiver debug en production
+    is_debug = os.environ.get('FLASK_ENV') == 'development'
+    app.run(debug=is_debug, port=5001)

@@ -4,7 +4,7 @@
 }
 .section-title {
     font-family: var(--font);
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(2.5rem, 8vw, 6rem);
     font-weight: 900;
     text-transform: uppercase;
     color: var(--white);
@@ -64,7 +64,7 @@
 }
 .toggle-add-btn:hover {
     background: var(--orange);
-    color: var(--black);
+    color: #000;
 }
 .add-race-form {
     background: rgba(255, 255, 255, 0.05);
@@ -100,7 +100,7 @@
 .submit-race-btn {
     align-self: flex-start;
     background: var(--orange);
-    color: var(--black);
+    color: #000;
     border: none;
     padding: 12px 30px;
     font-family: var(--font);
@@ -186,10 +186,64 @@
 }
 .delete-btn:hover {
     background: var(--orange);
-    color: var(--black);
+    color: #000;
     transform: scale(1.1);
     border-color: var(--orange);
 }
 .admin-mode .delete-btn {
     display: block;
+}
+
+/* ── RESPONSIVE MOBILE ── */
+@media (max-width: 768px) {
+    .calendrier-section {
+        padding: 130px 1rem 5vh;
+    }
+    .controls-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .search-container {
+        max-width: 100%;
+    }
+    .toggle-add-btn {
+        width: 100%;
+    }
+    .form-group {
+        flex-direction: column;
+    }
+    .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    /* -- Cartes Premium Mobile -- */
+    .race-list {
+        gap: 2rem;
+    }
+    .race-card {
+        background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 100%);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 24px;
+        padding: 2rem 1.5rem;
+    }
+    .race-date {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+    }
+    .race-name {
+        font-size: 1.8rem;
+        line-height: 1.15;
+        margin-bottom: 0.5rem;
+    }
+    .race-type {
+        font-size: 0.95rem;
+        color: rgba(255,255,255,0.7);
+    }
+}
+
+@media (max-width: 480px) {
+    .race-name { font-size: 1.2rem; }
+    .race-date { font-size: 1rem; }
+    .submit-race-btn { width: 100%; text-align: center; }
 }
