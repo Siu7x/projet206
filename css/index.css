@@ -448,8 +448,8 @@ canvas {
 
 
 .social-card img {
-    width: 58px;
-    height: 68px;
+    width: 50px;
+    height: 50px;
     object-fit: contain;
     opacity: 1;
     transition: opacity 0.2s;
@@ -470,6 +470,48 @@ canvas {
     }
 }
 /* La ligne de séparation */
+
+/* Loading Overlay for 3D Model */
+#loading-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.9); /* Semi-transparent black background */
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    z-index: 100; /* Ensure it's above the canvas */
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0; /* Start with 0 opacity for transition */
+}
+
+#loading-overlay.visible {
+    opacity: 1;
+    display: flex; /* Show when visible */
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #F97316; /* Orange color for the spinner */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loading-progress {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
 .footer-divider {
     width: 85%;
     border: none;
@@ -478,41 +520,7 @@ canvas {
     background-color: #000000;
 }
 
-/* LE FOOTER (uniquement le bas) */
-.footer-bottom {
-    background-color: #000000;
-    color: white;
-    text-align: center;
-    padding: 40px 0 20px 0;
-}
-
-.footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 25px;
-}
-
-.footer-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 0.8rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.brand-name {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 5px 0;
-}
-
-.legal {
-    color: #ffffff;
-    font-size: 0.7rem;
-}
-
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     /* On supprime le masque sur mobile pour que l'image et l'orange soient bien visibles */
     .visible-mask {
         -webkit-mask-image: none !important;
@@ -530,9 +538,17 @@ canvas {
         text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5); /* Ajout d'une ombre forte pour le détacher du fond */
     }
 
+    .grain-overlay {
+        opacity: 0; /* Enlève le filtre grain sur mobile et iPad */
+    }
+
     /* Amélioration de la visibilité du prénom Enzo Ragni */
     .layer-name {
-        bottom: 45%; /* Remonte le texte au milieu pour le placer juste au-dessus du casque */
+        bottom: 45%; /* Remonté pour iPad/Mobile */
+    }
+    .prenom-pilote {
+        letter-spacing: 0.1em; /* Plus d'espace pour la lisibilité */
+        -webkit-text-stroke: 1px white;
     }
 
     .hero-content-section {
@@ -542,13 +558,12 @@ canvas {
         padding-top: 10vh;
     }
     .model-3d-container {
-        height: 38vh; /* Hauteur réduite pour correspondre à la nouvelle taille */
+        height: 50vh; 
         margin-bottom: 40px;
     }
     
-    /* Dézoome la voiture 3D pour qu'elle tienne mieux sur l'écran étroit */
     .model-3d-container canvas {
-        transform: scale(0.85); /* Légèrement agrandi selon votre demande */
+        transform: scale(0.75); /* Dézoomé pour iPad */
         transform-origin: center center;
     }
     .sponsors-title {

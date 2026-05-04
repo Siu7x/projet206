@@ -111,7 +111,7 @@
 }
 
 /* ── RESPONSIVE MOBILE ── */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .site-nav-inner {
         /* On garde la direction en ligne mais on ajuste le padding */
         flex-direction: row;

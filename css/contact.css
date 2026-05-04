@@ -44,11 +44,10 @@ a, button { cursor: pointer; text-decoration: none; }
 .main-content {
     position: relative;
     z-index: 10;
-    min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: calc(var(--nav-h) + 40px) 1.5rem 100px;
+    /* align-items: center; */ /* Supprimé pour laisser le contenu s'aligner naturellement */
+    padding: calc(var(--nav-h) + 40px) 1.5rem 100px; /* Garde le padding bas pour l'espacement après le formulaire */
 }
 
 /* ── CARD PRINCIPALE ── */
@@ -194,37 +193,6 @@ a, button { cursor: pointer; text-decoration: none; }
     background: var(--white);
     transform: translateX(5px);
     box-shadow: -6px 0 0 0 var(--orange);
-}
-
-/* ── FOOTER (Harmonisation) ── */
-.footer-bottom {
-    padding: 60px 5vw;
-    text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    position: relative;
-    z-index: 10;
-}
-
-.footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-bottom: 30px;
-}
-
-.footer-links a {
-    font-family: var(--font);
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 2px;
-}
-
-.brand-name {
-    font-family: var(--font);
-    font-size: clamp(3rem, 10vw, 8rem);
-    font-weight: 900;
-    opacity: 0.05;
-    text-transform: uppercase;
 }
 
 /* ── RESPONSIVE ── */

@@ -7,6 +7,7 @@
   <title>206RT — Contact</title>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700;900&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/nav.css">
+  <link rel="stylesheet" href="../css/index.css">
   <link rel="stylesheet" href="../css/contact.css">
 </head>
 <body>
@@ -61,6 +62,33 @@
 
     </div>
   </main>
+
+  <div class="ligne-blanche"></div>
+
+  <!-- SECTION RÉSEAUX (Même taille que sur l'index) -->
+  <section class="social-section">
+    <p class="social-label">Suivre l'aventure</p>
+    <h2 class="social-title">Mes réseaux sociaux</h2>
+    <div class="divider"></div>
+    <div class="social-grid">
+      <a href="https://www.instagram.com/206.racingteam/" target="_blank" class="social-card">
+        <img src="{{ url_for('static', filename='reseau/instagram.webp') }}" alt="Instagram">
+        Instagram
+      </a>
+      <a href="https://www.youtube.com/@206RT-v4l" target="_blank" class="social-card">
+        <img src="{{ url_for('static', filename='reseau/youtube.webp') }}" alt="YouTube">
+        YouTube
+      </a>
+      <a href="https://www.tiktok.com/@206_rt" target="_blank" class="social-card">
+        <img src="{{ url_for('static', filename='reseau/tiktok.webp') }}" alt="TikTok">
+        TikTok
+      </a>
+      <a href="https://www.facebook.com/people/206-Racing-Team/61555781971833/" target="_blank" class="social-card">
+        <img src="{{ url_for('static', filename='reseau/facebook.webp') }}" alt="Facebook">
+        Facebook
+      </a>
+    </div>
+  </section>
 
   <!-- FOOTER -->
   <footer class="footer-bottom">

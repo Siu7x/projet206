@@ -132,7 +132,7 @@ a, button { cursor: pointer; text-decoration: none; }
     grid-template-columns: 1fr 1fr;
     min-height: 70vh;
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(60px); /* Augmenté pour un effet plus visible */
     transition: opacity 0.8s ease, transform 0.8s ease;
     margin-bottom: 4rem;
 }
@@ -234,6 +234,7 @@ a, button { cursor: pointer; text-decoration: none; }
 .social-section {
     padding: 80px 40px;
     text-align: center;
+    background-color: #000000;
 }
 
 .social-label {
@@ -241,19 +242,22 @@ a, button { cursor: pointer; text-decoration: none; }
     letter-spacing: 0.2em;
     color: rgba(255, 255, 255, 0.4);
     text-transform: uppercase;
+    margin-bottom: 8px;
     font-family: 'Oswald', sans-serif;
 }
 
 .social-title {
-    font-size: clamp(2.5rem, 6vw, 62px);
+    font-size: 62px;
     font-weight: 500;
     color: #ffffff;
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
     font-family: 'Oswald', sans-serif;
 }
 
 .divider {
     width: 32px;
-    height: 1px;
+    height: 0.5px;
     background: rgba(255, 255, 255, 0.2);
     margin: 16px auto 40px;
 }
@@ -261,7 +265,7 @@ a, button { cursor: pointer; text-decoration: none; }
 .social-grid {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 46px;
     flex-wrap: wrap;
 }
 
@@ -269,72 +273,172 @@ a, button { cursor: pointer; text-decoration: none; }
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    padding: 25px;
-    border: 0.5px solid rgba(255, 255, 255, 0.5);
+    gap: 40px;
+    padding: 28px 36px;
+    border: 0.5px solid rgb(255, 255, 255);
     border-radius: 12px;
+    background: transparent;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 28px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    transition: border-color 0.2s, color 0.2s;
+    min-width: 120px;
+}
+
+
+.social-card img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    opacity: 1;
+    transition: opacity 0.2s;
+}
+
+@media (max-width: 600px) {
+    .social-section {
+        padding: 60px 20px;
+    }
+
+    .social-grid {
+        gap: 12px;
+    }
+
+    .social-card {
+        padding: 20px 24px;
+        min-width: 100px;
+    }
+}
+/* La ligne de séparation */
+
+/* Loading Overlay for 3D Model */
+#loading-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.9); /* Semi-transparent black background */
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     color: white;
     font-family: 'Oswald', sans-serif;
-    min-width: 140px;
-    transition: 0.3s;
+    font-size: 1.5rem;
+    z-index: 100; /* Ensure it's above the canvas */
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0; /* Start with 0 opacity for transition */
 }
 
-.social-card:hover { border-color: var(--orange); color: var(--orange); }
+#loading-overlay.visible {
+    opacity: 1;
+    display: flex; /* Show when visible */
+}
 
-.social-card img { width: 45px; height: 45px; object-fit: contain; }
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #F97316; /* Orange color for the spinner */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
 
-/* ── RESPONSIVE GLOBAL (TABLETTES & MOBILES < 1024px) ── */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loading-progress {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+.footer-divider {
+    width: 85%;
+    border: none;
+    border-top: 1px solid #333;
+    margin: 0 auto; /* Centrée */
+    background-color: #000000;
+}
+
 @media (max-width: 1024px) {
-    
-    .ligne-blanche { margin: 40px auto; }
-
-    .hero { padding: 15vh 6vw 5vh; min-height: auto; }
-    .hero-title { font-size: clamp(3.5rem, 12vw, 8rem); }
-    .hero-scroll-indicator { display: none; }
-
-    .membres { padding: 0 4vw 2rem; }
-    .section-label { margin-bottom: 3rem; }
-
-    /* L'image ne s'écrase plus ici car on passe en colonne */
-    .membre-item {
-        display: flex;
-        flex-direction: column;
-        background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%);
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 24px;
-        overflow: hidden;
+    /* On supprime le masque sur mobile pour que l'image et l'orange soient bien visibles */
+    .visible-mask {
+        -webkit-mask-image: none !important;
+        mask-image: none !important;
     }
 
-    .membre-item.reverse .membre-img,
-    .membre-item.reverse .membre-info { order: unset; }
+    /* Amélioration de la lisibilité du texte d'intro sur mobile */
+    .description-head-container {
+        top: 130px; /* S'assure qu'il ne rentre pas en collision avec la navigation */
+        left: 1rem;
+    }
+    .description-head {
+        font-size: 1rem; /* On force une taille minimum de 16px (1rem) pour le confort de lecture */
+        mix-blend-mode: normal; /* On désactive le blend-mode qui peut rendre le texte illisible sur la photo */
+        text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5); /* Ajout d'une ombre forte pour le détacher du fond */
+    }
 
-    .membre-img img { 
-        min-height: 400px; /* Hauteur stable pour tablette */
+    /* Amélioration de la visibilité du prénom Enzo Ragni */
+    .layer-name {
+        bottom: 55%; /* Remonté pour iPad/Mobile */
+    }
+    .prenom-pilote {
+        letter-spacing: 0.1em; /* Plus d'espace pour la lisibilité */
+        -webkit-text-stroke: 1px white;
+    }
+
+    .hero-content-section {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        min-height: auto;
+        padding-top: 10vh;
+    }
+    .model-3d-container {
         height: 50vh; 
-        filter: grayscale(0%) brightness(0.9);
+        margin-bottom: 40px;
     }
-
-    .membre-info { padding: 2.5rem 1.5rem; }
-
-    .membre-name {
-        font-size: clamp(2.5rem, 8vw, 4rem);
-        color: var(--white);
-        -webkit-text-stroke: 0px;
+    
+    .model-3d-container canvas {
+        transform: scale(0.75); /* Dézoomé pour iPad */
+        transform-origin: center center;
     }
-
-    .membre-num {
-        font-size: 5rem;
-        -webkit-text-stroke: 2px var(--orange);
-        opacity: 0.5;
+    .sponsors-title {
+        letter-spacing: 0.1em;
+    }
+    .marquee-content {
+        gap: 30px;
+    }
+    .sponsor-logo {
+        height: 65px;
+    }
+    .social-title {
+        font-size: 42px;
+    }
+    .ligne-blanche {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .pilote {
+        margin-bottom: 2rem;
     }
 }
 
-/* ── PETITS MOBILES (< 600px) ── */
-@media (max-width: 600px) {
-    .social-section { padding: 60px 20px; }
-    .social-grid { gap: 15px; }
-    .social-card { padding: 20px; min-width: 120px; font-size: 18px; }
-    .social-card img { width: 35px; height: 35px; }
-    
-    .membre-img img { min-height: 300px; }
+/* ── RESPONSIVE MOBILE & IPAD (< 1024px) ── */
+@media (max-width: 1024px) {
+    .hero {
+        min-height: auto; /* Laisse le contenu définir la hauteur */
+        padding-top: 120px; /* Espace suffisant sous la barre de navigation fixe */
+        padding-bottom: 40px; /* Espacement en bas de la section */
+        justify-content: flex-start; /* Aligne le contenu en haut */
+    }
+
+    .hero-scroll-indicator {
+        display: none; /* Cache l'indicateur de défilement sur mobile pour une meilleure UX */
+    }
+
+    .hero-title {
+        margin-bottom: 2rem; /* Réduit l'espace sous le titre pour compacter */
+    }
 }

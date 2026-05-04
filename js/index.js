@@ -3,8 +3,8 @@ const mask = document.querySelector('.visible-mask');
 const name = document.getElementById('hero-name');
 
 document.addEventListener('mousemove', (e) => {
-    // Désactiver l'effet de masque "souris" sur mobile pour éviter les bugs
-    if (window.innerWidth <= 768) return;
+    // Désactiver l'effet sur mobile et tablette (iPad) pour éviter les saccades
+    if (window.innerWidth <= 1024) return;
 
     const x = e.clientX;
     const y = e.clientY;

@@ -50,8 +50,8 @@
         <div class="layer-orange"></div>
 
         <div class="layer-name">
-            <h1 id="hero-name" class="prenom-pilote">
-                Enzo<span class="px-[5vw]"></span> Ragni
+            <h1 class="prenom-pilote">
+                Enzo Ragni
             </h1>
         </div>
 
@@ -79,6 +79,10 @@
 <section class="model-3d-title">Découvrez ma Peugeot 206 </section>
  <div class="ligne-blanche"></div>
 <section class="model-3d-container">
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <div id="loading-progress">0%</div>
+    </div>
     </section>
 
 
@@ -114,20 +118,20 @@
   <h2 class="social-title">Mes réseaux sociaux</h2>
   <div class="divider"></div>
   <div class="social-grid">
-    <a href="https://www.instagram.com/206.racingteam..." class="social-card">
-      <img src="../reseau/instagram.png" alt="Instagram">
+    <a href="https://www.instagram.com/206.racingteam/" target="_blank" class="social-card">
+      <img src="{{ url_for('static', filename='reseau/instagram.webp') }}" alt="Instagram">
       Instagram
     </a>
-    <a href="https://www.youtube.com/@206RT-v4l" class="social-card">
-      <img src="../reseau/youtube.png" alt="YouTube">
+    <a href="https://www.youtube.com/@206RT-v4l" target="_blank" class="social-card">
+      <img src="{{ url_for('static', filename='reseau/youtube.webp') }}" alt="YouTube">
       YouTube
     </a>
-    <a href="https://www.tiktok.com/@206_rt..." class="social-card">
-      <img src="../reseau/tiktok.png" alt="TikTok">
+    <a href="https://www.tiktok.com/@206_rt" target="_blank" class="social-card">
+      <img src="{{ url_for('static', filename='reseau/tiktok.webp') }}" alt="TikTok">
       TikTok
     </a>
-    <a href="#" class="social-card">
-      <img src="../reseau/facebook.png" alt="Facebook">
+    <a href="https://www.facebook.com/people/206-Racing-Team/61555781971833/" target="_blank" class="social-card">
+      <img src="{{ url_for('static', filename='reseau/facebook.webp') }}" alt="Facebook">
       Facebook
     </a>
   </div>

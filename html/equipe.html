@@ -74,7 +74,7 @@
         <p class="membre-role">Pilote</p>
         <h2 class="membre-name">Enzo<br>Ragni</h2>
         <div class="membre-sep"></div>
-        <p class="membre-desc">Passionné de sport automobile et compétiteur, le simulateur a forgé ma rigueur et ma vitesse. En 2026, je passe au réel pour m'imposer en compétition.</p>
+        <p class="membre-desc">Depuis mon enfance je suis bercé dans ce monde incroyable qui est le sport automobile et surtout le monde du rallye. Alors, après beaucoup d'hésitations, je décide d’enfin passer le pas et de me lancer en tant que pilote amateur sur ma 206. Ma passion me permet aussi de relier le travail car ce site permet de valider mon projet d’étude. Alors merci d'être passé sur le site et merci de suivre notre aventure à moi et mon équipe</p>
         <a href="https://www.linkedin.com/in/enzo-ragni-690aba33b/" target="_blank" class="linkedin-link">Profil LinkedIn →</a>
       </div>
     </article>
@@ -107,7 +107,9 @@
         <p class="membre-role">Chef de projet Digital</p>
         <h2 class="membre-name">Mathilde Wastjer</h2>
         <div class="membre-sep"></div>
-        <p class="membre-desc">Hello moi c'est Mathilde, j'ai tout juste 18 ans ! Actuellement étudiante en Bachelor Chef de Projet Digitale (je suis un peu un couteau Suisse en gros). Dans le cadre de mes études, j'ai la chance de pouvoir participer à un projet qui allie ma passion et mon travail de rêve: l'automobile et la communication sportive. Ce projet 206RT est une veritable occasion de pouvoir accompagner Enzo tout au long de se projet en gérant sa communication. Je reste tout de même un couteau Suisse jusqu'au bout car je suis passionnée aussi de musique, de création et de sport en général(football,tennis,formule 1,motogp,...) !</p>
+        <p class="membre-desc">Véritable couteau suisse du numérique, j'ai la chance de participer à un projet qui allie mes passions et mes aspirations professionnelles : l’automobile et la communication sportive.
+
+Dans le cadre du projet 206RT, j'accompagne Enzo en gérant l'intégralité de sa communication. Ma curiosité ne s'arrête pas là : je suis également passionnée de musique, de création et de sport en général, du football à la Formule 1 en passant par le tennis et la MotoGP !</p>
         <a href="https://www.linkedin.com/in/mathilde-wastjer-37074a386/" target="_blank" class="linkedin-link">Profil LinkedIn →</a>
       </div>
     </article>
@@ -123,8 +125,8 @@
         <p class="membre-role">Chef de projet Digital</p>
         <h2 class="membre-name">Luna Rodrigues</h2>
         <div class="membre-sep"></div>
-        <p class="membre-desc">Je m’appelle Luna, j’ai 24 ans et je suis étudiante en Bachelor Chef de Projet Digital.
-Dans le cadre de mes études, je participe au projet 206, autour d’une Peugeot 206 engagée en rallye, en m’occupant de la communication.
+        <p class="membre-desc">Dans le cadre de mes études, je participe au projet 206, autour d’une Peugeot 206 engagée en rallye, en m’occupant de la communication.
+
 Passionnée par la musique, les concerts et l’automobile, j’aime partager des projets et des expériences.</p>
         <a href="https://www.linkedin.com/in/luna-rodrigues-57b04a256/" target="_blank" class="linkedin-link">Profil LinkedIn →</a>
       </div>
@@ -141,7 +143,7 @@ Passionnée par la musique, les concerts et l’automobile, j’aime partager de
         <p class="membre-role">Développeur full-stack</p>
         <h2 class="membre-name">Nathan</h2>
         <div class="membre-sep"></div>
-        <p class="membre-desc">Passionné par le code, il s'occupe de l'intégration technique, de la structure de l'application et des animations interactives.</p>
+        <p class="membre-desc">J'accompagne les projets web de la vision créative à la mise en ligne sécurisée. Mon approche combine design émotionnel (UX/UI & Animations) et rigueur technique (Architecture, Sécurité, DevOps) pour livrer des produits web robustes, scalables et hautement interactifs.</p>
         <a href="https://www.linkedin.com/in/nathan-grunewald-b87078333/" target="_blank" class="linkedin-link">Profil LinkedIn →</a>
       </div>
     </article>
@@ -170,20 +172,20 @@ Passionnée par la musique, les concerts et l’automobile, j’aime partager de
   <h2 class="social-title">Mes réseaux sociaux</h2>
   <div class="divider"></div>
   <div class="social-grid">
-    <a href="https://www.instagram.com/206.racingteam..." class="social-card">
-      <img src="../reseau/instagram.png" alt="Instagram">
+    <a href="https://www.instagram.com/206.racingteam/" target="_blank" class="social-card">
+      <img src="{{ url_for('static', filename='reseau/instagram.webp') }}" alt="Instagram">
       Instagram
     </a>
-    <a href="https://www.youtube.com/@206RT-v4l" class="social-card">
-      <img src="../reseau/youtube.png" alt="YouTube">
+    <a href="https://www.youtube.com/@206RT-v4l" target="_blank" class="social-card">
+      <img src="{{ url_for('static', filename='reseau/youtube.webp') }}" alt="YouTube">
       YouTube
     </a>
-    <a href="https://www.tiktok.com/@206_rt..." class="social-card">
-      <img src="../reseau/tiktok.png" alt="TikTok">
+    <a href="https://www.tiktok.com/@206_rt" target="_blank" class="social-card">
+      <img src="{{ url_for('static', filename='reseau/tiktok.webp') }}" alt="TikTok">
       TikTok
     </a>
-    <a href="#" class="social-card">
-      <img src="../reseau/facebook.png" alt="Facebook">
+    <a href="https://www.facebook.com/people/206-Racing-Team/61555781971833/" target="_blank" class="social-card">
+      <img src="{{ url_for('static', filename='reseau/facebook.webp') }}" alt="Facebook">
       Facebook
     </a>
   </div>
@@ -220,7 +222,7 @@ Passionnée par la musique, les concerts et l’automobile, j’aime partager de
     gsap.utils.toArray('.membre-item').forEach(item => {
       ScrollTrigger.create({
         trigger: item,
-        start: "top 85%", // L'animation se lance quand la carte atteint 85% de l'écran
+        start: "top 90%", // L'animation se lance quand la carte atteint 90% de l'écran (plus tôt)
         toggleClass: "visible",
         once: true // L'animation ne se joue qu'une fois pour éviter les bugs sur mobile
       });
